@@ -41,9 +41,9 @@ DROP TABLE IF EXISTS stackoverflow.respondente;
 CREATE TABLE IF NOT EXISTS stackoverflow.respondente (
     respondente_id SERIAL,
     nome VARCHAR(255) NOT NULL,
-    contrib_open_source VARCHAR(255) NOT NULL,
-    programa_hobby VARCHAR(255) NOT NULL,
-    salario VARCHAR(255) NOT NULL,
+    contrib_open_source SMALLINT NOT NULL,
+    programa_hobby SMALLINT NOT NULL,
+    salario FLOAT NOT NULL,
     sistema_operacional_id INT NOT NULL,
     pais_id INT NOT NULL,
     empresa_id INT NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS stackoverflow.resp_usa_linguagem (
     resp_usa_linguagem_id SERIAL,
     respondente_id INT NOT NULL,
     linguagem_programacao_id INT NOT NULL,
-    momento SMALLINT,
+    momento SMALLINT NOT NULL,
     PRIMARY KEY (resp_usa_linguagem_id),
     FOREIGN KEY (respondente_id)
         REFERENCES stackoverflow.respondente (respondente_id)
