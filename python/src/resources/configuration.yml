@@ -1,3 +1,52 @@
+pipeline: 
+  datasource: /home/marcos/dataengineeringatame/python/src/resources/base_de_respostas_10k_amostra.csv
+  dimension_tables:
+    - ferramenta_comunic_tb
+    - sistema_operacional
+    - linguagem_programacao
+    - empresa
+    - pais
+
+  ferramenta_comunic_tb:
+    model: CommunicationToolModel
+    field: CommunicationTools
+    database: stackoverflow
+    table: ferramenta_comunic_tb
+    embbebedList: True
+    sink: PostgresDAO
+
+  sistema_operacional:
+    model: SOModel
+    field: OperatingSystem
+    database: stackoverflow
+    table: sistema_operacional
+    embbebedList: False
+    sink: PostgresDAO
+
+  linguagem_programacao:
+    model: LanguageWorkedWithModel
+    field: LanguageWorkedWith
+    database: stackoverflow
+    table: linguagem_programacao
+    embbebedList: True
+    sink: PostgresDAO
+
+  empresa:
+    model: CompanyModel
+    field: CompanySize
+    database: stackoverflow
+    table: empresa
+    embbebedList: False
+    sink: PostgresDAO
+
+  pais:
+    model: CountryModel
+    field: Country
+    database: stackoverflow
+    table: pais
+    embbebedList: False
+    sink: PostgresDAO
+  
 postgres:
   port: 5432
   database: postgres
