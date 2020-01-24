@@ -1,4 +1,8 @@
 import socket
+from common.ingestor.dao import DAO
+from common.utils.reader import configuration
+from common.utils.logger import logger
+from common.utils import spark
 
 class PostgresDAO(DAO):
     def __init__(self):
@@ -6,14 +10,15 @@ class PostgresDAO(DAO):
         
         secret = configuration()
         self.host = socket.gethostbyname(socket.gethostname())
-        self.user = secret.postgres.user
-        self.password = secret.postgres.password
-        self.port = secret.postgres.port
+        self.database = secret.get('postgres').get('database')
+        self.user = secret.get('postgres').get('user')
+        self.password = secret.get('postgres').get('password')
+        self.port = secret.get('postgres').get('port')
         
     def select(self, db_table):
         """Query engine to this DAO implementation"""
         try:
-            return spark.read\
+            return spark.getOrCreate().read\
             .format('jdbc')\
             .option('url', f'jdbc:postgresql://{self.host}:{self.port}/{self.database}')\
             .option('dbtable', f'{db_table}')\
@@ -21,13 +26,13 @@ class PostgresDAO(DAO):
             .option('password', self.password)\
             .option('driver', 'org.postgresql.Driver')\
             .load()     
-        except Exception as err: 
-            logger.error(err.errno)
+        except Exception as error: 
+            logger.error(error)
             
     def insert(self, db_table, dataframe):
         """Data ingestion engine to this DAO implementation"""
         try:
-            data.write\
+            dataframe.write\
             .format('jdbc')\
             .option('url', f'jdbc:postgresql://{self.host}:{self.port}/{self.database}')\
             .option('dbtable', f'{db_table}')\
@@ -36,5 +41,5 @@ class PostgresDAO(DAO):
             .option('driver', 'org.postgresql.Driver')\
             .mode('append')\
             .save()
-        except Exception as err: 
-            logger.error(err.errno)
+        except Exception as error: 
+            logger.error(error)
