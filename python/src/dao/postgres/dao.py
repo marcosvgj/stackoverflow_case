@@ -1,5 +1,5 @@
 import socket
-from common.ingestor.dao import DAO
+from common.dao.base import DAO
 from common.utils.reader import configuration
 from common.utils.logger import logger
 from common.utils import spark

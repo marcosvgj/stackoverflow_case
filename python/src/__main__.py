@@ -12,6 +12,7 @@ def main():
     """ Entrypoint to spark job """
     ingestor = Entrypoint()
     ingestor.run()
+    #PostgresDAO().select("stackoverflow.empresa").show(100,False)
 
 if __name__ == '__main__':
     main()
