@@ -16,7 +16,7 @@ class Ingestor:
             sink = metadata.get('sink')
             db_table = f'{metadata.get("database")}.{metadata.get("table")}'
             access = DAO.instanceOf(sink)
-            access.insert(db_table=db_table, data=data)
+            access().insert(db_table=db_table, dataframe=data)
         except Exception as error: 
             logger.error(error)
             

@@ -6,14 +6,12 @@ NOT_IMPL_MSG = "This method need to be implemented, please check the documentati
 class DAO:
     __metaclass__ = abc.ABCMeta
 
-    @staticmethod
     @abc.abstractmethod
     def select(self, db_table):
         raise NotImplementedError(NOT_IMPL_MSG)
         
-    @staticmethod
     @abc.abstractmethod
-    def insert( db_table, data):
+    def insert(self, db_table, dataframe):
         raise NotImplementedError(NOT_IMPL_MSG)
         
     @staticmethod
@@ -26,4 +24,4 @@ class DAO:
         try:
             return next(filter(lambda x: x.__name__ == subclass, DAO.__subclasses__()))
         except StopIteration as error:
-            raise Exception(f'Please verify if this feature is implemented already: {error}')
+            raise Exception(f'Please verify if this feature was implemented: {error}')

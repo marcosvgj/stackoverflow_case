@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS stackoverflow.respondente (
     nome VARCHAR(255) NOT NULL,
     contrib_open_source SMALLINT NOT NULL,
     programa_hobby SMALLINT NOT NULL,
-    salario FLOAT NOT NULL,
+    salario DECIMAL(10,2) NOT NULL,
     sistema_operacional_id INT NOT NULL,
     pais_id INT NOT NULL,
     empresa_id INT NOT NULL,

@@ -18,6 +18,9 @@ class Dimension(Ingestor):
         data = Ingestor.apply(Dimension.rule, self.metadata)
         self.load(self.metadata, data)
 
+    def get(self):
+        return Ingestor.apply(Dimension.rule, self.metadata)
+
     @staticmethod
     def checkConstraint(field, dataframe):
         """ Responsible for verifying the field's integrity given dataframe"""

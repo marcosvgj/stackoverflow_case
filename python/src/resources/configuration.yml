@@ -7,11 +7,11 @@ pipeline:
     - empresa
     - pais
 
-  ferramenta_comunic_tb:
+  ferramenta_comunic:
     model: CommunicationToolModel
     field: CommunicationTools
     database: stackoverflow
-    table: ferramenta_comunic_tb
+    table: ferramenta_comunic
     embbebedList: True
     sink: PostgresDAO
 

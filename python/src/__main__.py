@@ -9,9 +9,9 @@ log_level = "WARN"
 logger.setLevel(getattr(logging, log_level))
 
 def main():
-    pipeline = Pipeline()
-    pipeline.run()
-    #PostgresDAO().select("stackoverflow.empresa").show(100,False)
+    #pipeline = Pipeline()
+    #pipeline.run()
+    PostgresDAO().select("stackoverflow.empresa").show(100,False)
 
 if __name__ == '__main__':
     main()

@@ -23,8 +23,6 @@ class Pipeline:
 
     def createFact(self):
         """TODO"""
-
-        
     
 
         
