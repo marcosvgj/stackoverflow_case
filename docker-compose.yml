@@ -1,0 +1,149 @@
+version: '3.1'
+services:
+  postgres:
+    container_name: ${POSTGRES_DOCKER_IMAGE_NAME}
+    build: postgres/
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - SUPERSET_USERNAME=${SUPERSET_USERNAME}
+      - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
+      - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
+      - SUPERSET_EMAIL=${SUPERSET_EMAIL}
+      - SUPERSET_PASSWORD=${SUPERSET_PASSWORD}
+      - DATABASE_DIALECT=${DATABASE_DIALECT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - SUPERSET_DB=${SUPERSET_DB}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - SLEEP_TIME=${SLEEP_TIME}
+    volumes:
+      - ./postgres/ddl:/docker-entrypoint-initdb.d/
+      - ./postgres/data:/var/lib/postgresql/data/pgdata
+    networks:
+      - general
+  
+  superset:
+    container_name: ${SUPERSET_DOCKER_IMAGE_NAME}
+    build: superset/
+    restart: on-failure
+    ports:
+      - "8088:8088"
+    depends_on:
+      - postgres
+    networks:
+      - general
+    links: 
+      - postgres
+    environment:
+      - SUPERSET_USERNAME=${SUPERSET_USERNAME}
+      - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
+      - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
+      - SUPERSET_EMAIL=${SUPERSET_EMAIL}
+      - SUPERSET_PASSWORD=${SUPERSET_PASSWORD}
+      - DATABASE_DIALECT=${DATABASE_DIALECT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - SUPERSET_DB=${SUPERSET_DB}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - SLEEP_TIME=${SLEEP_TIME}
+
+  superset_init:
+    build: superset/
+    restart: on-failure
+    depends_on:
+      - superset
+    networks:
+      - general
+    links:
+      - postgres
+    command: >
+      superset-init --username ${SUPERSET_USERNAME} --firstname ${SUPERSET_FIRSTNAME} \
+      --lastname ${SUPERSET_LASTNAME} \
+      --email ${SUPERSET_EMAIL} \
+      --password ${SUPERSET_PASSWORD}
+    environment:
+      - SUPERSET_USERNAME=${SUPERSET_USERNAME}
+      - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
+      - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
+      - SUPERSET_EMAIL=${SUPERSET_EMAIL}
+      - SUPERSET_PASSWORD=${SUPERSET_PASSWORD}
+      - DATABASE_DIALECT=${DATABASE_DIALECT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - SUPERSET_DB=${SUPERSET_DB}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - SLEEP_TIME=${SLEEP_TIME}
+
+  postgres_metadata_load:
+    image: docker
+    privileged: true
+    restart: on-failure
+    depends_on:
+      - superset_init
+    networks:
+      - general
+    links:
+      - postgres
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./postgres/dml/init_superset.sql:/postgres/init_superset.sql
+      - ./postgres/tmp/waiting_database.sh:/postgres/waiting_database.sh
+    environment:
+      - SUPERSET_USERNAME=${SUPERSET_USERNAME}
+      - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
+      - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
+      - SUPERSET_EMAIL=${SUPERSET_EMAIL}
+      - SUPERSET_PASSWORD=${SUPERSET_PASSWORD}
+      - DATABASE_DIALECT=${DATABASE_DIALECT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - SUPERSET_DB=${SUPERSET_DB}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - SLEEP_TIME=${SLEEP_TIME}
+    command: docker cp postgres/init_superset.sql ${POSTGRES_DOCKER_IMAGE_NAME}:/tmp/init_superset.sql
+    depends_on:
+      - superset_init
+
+  postgres_metadata_insertion:
+    image: docker
+    privileged: true
+    restart: on-failure
+    depends_on:
+      - postgres_metadata_load
+    networks:
+      - general
+    links:
+      - postgres
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./postgres/ddl/waiting_database.sh:/docker-entrypoint-initdb.d/waiting_database.sh
+    environment:
+      - SUPERSET_USERNAME=${SUPERSET_USERNAME}
+      - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
+      - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
+      - SUPERSET_EMAIL=${SUPERSET_EMAIL}
+      - SUPERSET_PASSWORD=${SUPERSET_PASSWORD}
+      - DATABASE_DIALECT=${DATABASE_DIALECT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - SUPERSET_DB=${SUPERSET_DB}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - SLEEP_TIME=${SLEEP_TIME}
+    command: docker exec -u ${POSTGRES_USER} ${POSTGRES_DOCKER_IMAGE_NAME} sh /docker-entrypoint-initdb.d/waiting_database.sh
+    depends_on:
+      - postgres_metadata_load
+networks:
+    general:
+        driver: bridge
