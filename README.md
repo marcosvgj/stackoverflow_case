@@ -7,10 +7,8 @@ Uma análise sobre dados do Stack Overflow
 1. [Solução](#solution)       
     - 2.1 [Proposta do modelo relacional - ERD](#t1)
     - 2.1 [Normalização de dados utilizando Apache Spark](#t2)
-3. [Setup da aplicação](#t3)
-    - 2.3 [Criação e ingestão das tabelas](#q4)
-    - 2.4 [Queries ad-hoc, uma análise utilizando Spark Dataframe](#q5)
-
+3. [Queries executadas](#t3)
+4. [Resultados](#t4)
 
 ## Resumo <a name="summary"></a>
 <p align="justify">O counteúdo deste repositório tem como objetivo demonstrar um fluxo de dados para realizar a normalização de um banco de dados utilizando como base <b>PySpark</b>. Além disso, será demonstrada a utilização da ferramenta <b>Apache Superset</b> para workloads de <i>Self-Service BI.</i></p>
@@ -81,7 +79,30 @@ Este componente tem como principal responsabilidade realizar a junção das regr
 ### API
 Este componente tem como principal responsabilidade ser uma interface do componente **Service** (ex.: Interface pode ser utilizada na criação de Operadores customizados para o Apache Airflow - Orquestrador).
 
+### Queries executadas <a name="t3"></a>
+A seguir segue o link de cada query realizada para responder as perguntas do teste: 
 
-## TODO
+1. Questão 1 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_01.sql"> Link! </a>]
+2. Questão 2 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_02.sql"> Link! </a>]
+3. Questão 3 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_03.sql"> Link! </a>]
+4. Questão 4 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_04.sql"> Link! </a>]
+5. Questão 5 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_05.sql"> Link! </a>]
+6. Questão 6 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_06.sql"> Link! </a>]
+7. Questão 7 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_07.sql"> Link! </a>]
+8. Questão 8 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_08.sql"> Link! </a>]
 
-![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/teste.png)
+### Resultados <a name="t3"></a>
+Para cada query realizada segue um resultado que responde as perguntas do teste: 
+
+1. Resultado - Questão 1 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_01.sql"> Link! </a>]
+2. Resultado - Questão 2 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_02.sql"> Link! </a>]
+3. Resultado - Questão 3 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_03.sql"> Link! </a>]
+4. Resultado - Questão 4 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_04.sql"> Link! </a>]
+5. Resultado - Questão 5 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_05.sql"> Link! </a>]
+6. Resultado - Questão 6 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_06.sql"> Link! </a>]
+7. Resultado - Questão 7 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_07.sql"> Link! </a>]
+8. Resultado - Questão 8 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_08.sql"> Link! </a>]
+
+## Questão Extra - Esboço
+
+[Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/teste_ame_questao_extra.png)
