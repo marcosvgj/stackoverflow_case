@@ -1,0 +1,57 @@
+pipeline: 
+  datasource: /home/marcos/dataengineeringatame/python/src/resources/base_de_respostas_10k_amostra.csv
+  fact: respondente
+  dimension_tables:
+    - ferramenta_comunic
+    - sistema_operacional
+    - linguagem_programacao
+    - empresa
+    - pais
+
+  ferramenta_comunic:
+    model: CommunicationToolModel
+    field: CommunicationTools
+    database: stackoverflow
+    table: ferramenta_comunic
+    embbebedList: True
+
+  sistema_operacional:
+    model: SOModel
+    field: OperatingSystem
+    database: stackoverflow
+    table: sistema_operacional
+    embbebedList: False
+
+  linguagem_programacao:
+    model: LanguageWorkedWithModel
+    field: LanguageWorkedWith
+    database: stackoverflow
+    table: linguagem_programacao
+    embbebedList: True 
+
+  empresa:
+    model: CompanyModel
+    field: CompanySize
+    database: stackoverflow
+    table: empresa
+    embbebedList: False
+
+  pais:
+    model: CountryModel
+    field: Country
+    database: stackoverflow
+    table: pais
+    embbebedList: False
+  
+  respondente:
+    model: RespondentModel
+    database: stackoverflow
+    table: respondente
+  
+postgres:
+  port: 5432
+  host: localhost
+  database: postgres
+  user: postgres
+  password: postgres
+  
