@@ -9,6 +9,8 @@ Uma análise sobre dados do Stack Overflow
     - 2.1 [Normalização de dados utilizando Apache Spark](#t2)
 3. [Queries executadas](#t3)
 4. [Resultados](#t4)
+5. [Questão Extra](#t5)
+6. [Adendos](#t6)
 
 ## Resumo <a name="summary"></a>
 <p align="justify">O counteúdo deste repositório tem como objetivo demonstrar um fluxo de dados para realizar a normalização de um banco de dados utilizando como base <b>PySpark</b>. Além disso, será demonstrada a utilização da ferramenta <b>Apache Superset</b> para workloads de <i>Self-Service BI.</i></p>
@@ -91,18 +93,41 @@ A seguir segue o link de cada query realizada para responder as perguntas do tes
 7. Questão 7 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_07.sql"> Link! </a>]
 8. Questão 8 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_08.sql"> Link! </a>]
 
-### Resultados <a name="t3"></a>
+### Resultados <a name="t4"></a>
 Para cada query realizada segue um resultado que responde as perguntas do teste: 
 
-1. Resultado - Questão 1 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_01.sql"> Link! </a>]
-2. Resultado - Questão 2 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_02.sql"> Link! </a>]
-3. Resultado - Questão 3 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_03.sql"> Link! </a>]
-4. Resultado - Questão 4 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_04.sql"> Link! </a>]
-5. Resultado - Questão 5 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_05.sql"> Link! </a>]
-6. Resultado - Questão 6 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_06.sql"> Link! </a>]
-7. Resultado - Questão 7 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_07.sql"> Link! </a>]
-8. Resultado - Questão 8 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/query_08.sql"> Link! </a>]
+1. Resultado - Questão 1 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_1_20200128T205232.csv"> Link! </a>]
+2. Resultado - Questão 2 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_2_20200128T205407.csv"> Link! </a>]
+3. Resultado - Questão 3 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_3_20200128T214344.csv"> Link! </a>]
+4. Resultado - Questão 4 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_4_20200128T214424.csv"> Link! </a>]
+5. Resultado - Questão 5 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_5_20200128T214447.csv"> Link! </a>]
+6. Resultado - Questão 6 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_6_20200128T214522.csv"> Link! </a>]
+7. Resultado - Questão 7 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_7_20200128T214545.csv"> Link! </a>]
+8. Resultado - Questão 8 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_8_20200128T214617.csv"> Link! </a>]
 
-## Questão Extra - Esboço
+### Questão Extra - Esboço <a name="t5"></a>
 
 [Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/teste_ame_questao_extra.png)
+
+### Vantagens da arquitetura proposta
+
+Custo reduzido em comparação a implementação manual via EC2 ou EKS.
+Serviço transfere responsabilidade para o provider sobre a configuração interna do cluster HDFS
+
+Além disso, as ferramentas Apache Superset e Apache Druid viabilizam o consumo de dados em <i>real-time</i> utilizando peça de mensageria o Apache Kafka.
+
+### Adendos <a name="t6"></a>
+
+A estruturação de códigos utilizada nesta aplicação tem como o objetivo demonstrar (por meio do hands-on) a implementação da arquitetura proposta.
+
+Nesta estruturação foram utilizadas as seguintes tecnologias: 
+
+1. Postgres 9.6 [Dockerizado]
+2. Apache Superset [Dockerizado]
+3. Apache PySpark [Dockerização em andamento]
+
+<i>obs.: A sincronização destes componentes é de responsabilidade do Docker Compose. </i>
+
+A proposta inicial era provisionar por meio do Docker compose um ambiente controlado para realizar o processo de ETL e a consulta de dados.
+
+Status: Não conclusão devido o esgotamento de tempo.
