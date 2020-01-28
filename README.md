@@ -107,7 +107,7 @@ Para cada query realizada segue um resultado que responde as perguntas do teste:
 
 ### Questão Extra - Esboço <a name="t5"></a>
 
-[Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/teste_ame_questao_extra.png)
+[Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/master/docs/teste_ame_questao_extra.png)
 
 ### Vantagens da arquitetura proposta
 
