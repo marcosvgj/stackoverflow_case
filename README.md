@@ -28,7 +28,7 @@ Como destacado anteriormente, o case foi solucionado utilizando como base a tecn
 ### Proposta do modelo relacional - ERD <a name="t1"></a>
 O modelo relacional foi implementado sob o banco relacional Postgres 9.6 conforme o Diagrama de Entidade e Relacionamento abaixo: 
 
-![Alt text](https://https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/erd_ame.svg)
+![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/erd_ame.svg)
 
 Logicamente, o modelo foi segmentado em três principais componentes para extração de Entidades e Relacionamentos da base denormalzada inspirado no modelo ***Star Schema (Kimball)***:
 
@@ -54,7 +54,7 @@ Logicamente, o modelo foi segmentado em três principais componentes para extra�
 
 A organização do código Pyspark utilizada nesta POC seguiu o padrão semelhante a Arquitetura Orientada a Serviços (SOA) evidenciado abaixo. Este padrão contribui para fácil manutenção do código fonte e principalmente para escalabilidade de análises sob o dado coletado.
 
-![Alt text](https://https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/arch_soa.svg)
+![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/arch_soa.svg)
 
  <table>
     <tr>
