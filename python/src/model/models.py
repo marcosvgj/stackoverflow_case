@@ -1,6 +1,6 @@
 from pyspark.sql.types import StructField, StringType, IntegerType, StringType, StructType, DoubleType
 
-class CommunicationToolModel:
+class CommunicationToolModel(StructType):
     @property
     def schema(self):    
         return StructType([
@@ -14,28 +14,28 @@ class SOModel(StructType):
                     StructField('sistema_operacional_id', IntegerType(), False),
                     StructField('nome', StringType(), False)])
     
-class LanguageWorkedWithModel:
+class LanguageWorkedWithModel(StructType):
     @property
     def schema(self):    
         return StructType([
             StructField('linguagem_programacao_id', IntegerType(), False),
             StructField('nome', StringType(), False)])
     
-class CompanyModel:
+class CompanyModel(StructType):
     @property
     def schema(self):    
         return StructType([
             StructField('empresa_id', IntegerType(), False),
             StructField('tamanho', StringType(), False)])
 
-class CountryModel:
+class CountryModel(StructType):
     @property
     def schema(self):    
         return StructType([
             StructField('pais_id', IntegerType(), False),
             StructField('nome', StringType(), False)])
 
-class RespLanguageModel:
+class RespLanguageModel(StructType):
     @property
     def schema(self):    
         return StructType([
@@ -44,7 +44,7 @@ class RespLanguageModel:
             StructField('linguagem_programacao_id', IntegerType(), False),
             StructField('momento', IntegerType(), False)])
     
-class RespToolsModel:
+class RespToolsModel(StructType):
     @property
     def schema(self):    
         return StructType([
@@ -52,7 +52,7 @@ class RespToolsModel:
             StructField('respondente_id', IntegerType(), False),
             StructField('ferramenta_comunic_id', IntegerType(), False)])
 
-class RespondentModel:
+class RespondentModel(StructType):
     @property
     def schema(self):    
         return StructType([

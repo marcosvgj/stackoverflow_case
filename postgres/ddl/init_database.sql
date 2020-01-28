@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS stackoverflow.ferramenta_comunic (
 
 CREATE TABLE IF NOT EXISTS stackoverflow.respondente (
     respondente_id SERIAL,
-    nome VARCHAR(255) NOT NULL,
+    nome VARCHAR(255),
     contrib_open_source SMALLINT NOT NULL,
     programa_hobby SMALLINT NOT NULL,
     salario DECIMAL(10,2) NOT NULL,

@@ -1,7 +1,8 @@
 pipeline: 
   datasource: /home/marcos/dataengineeringatame/python/src/resources/base_de_respostas_10k_amostra.csv
+  fact: respondente
   dimension_tables:
-    - ferramenta_comunic_tb
+    - ferramenta_comunic
     - sistema_operacional
     - linguagem_programacao
     - empresa
@@ -13,7 +14,6 @@ pipeline:
     database: stackoverflow
     table: ferramenta_comunic
     embbebedList: True
-    sink: PostgresDAO
 
   sistema_operacional:
     model: SOModel
@@ -21,15 +21,13 @@ pipeline:
     database: stackoverflow
     table: sistema_operacional
     embbebedList: False
-    sink: PostgresDAO
 
   linguagem_programacao:
     model: LanguageWorkedWithModel
     field: LanguageWorkedWith
     database: stackoverflow
     table: linguagem_programacao
-    embbebedList: True
-    sink: PostgresDAO
+    embbebedList: True 
 
   empresa:
     model: CompanyModel
@@ -37,7 +35,6 @@ pipeline:
     database: stackoverflow
     table: empresa
     embbebedList: False
-    sink: PostgresDAO
 
   pais:
     model: CountryModel
@@ -45,11 +42,16 @@ pipeline:
     database: stackoverflow
     table: pais
     embbebedList: False
-    sink: PostgresDAO
+  
+  respondente:
+    model: RespondentModel
+    database: stackoverflow
+    table: respondente
   
 postgres:
   port: 5432
+  host: localhost
   database: postgres
   user: postgres
-  password: ame
+  password: postgres
   

@@ -18,10 +18,3 @@ class DAO:
     def from_csv(path, header=True):
         return spark.getOrCreate().read.format("csv")\
         .option("header", header).load(path)
-
-    @staticmethod
-    def instanceOf(subclass):
-        try:
-            return next(filter(lambda x: x.__name__ == subclass, DAO.__subclasses__()))
-        except StopIteration as error:
-            raise Exception(f'Please verify if this feature was implemented: {error}')

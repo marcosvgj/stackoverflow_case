@@ -11,4 +11,4 @@ def configuration(abs_path=None):
         with open(path) as cfg:
             return yaml.load(cfg, Loader=yaml.FullLoader)
     except Exception as error:
-        logger.error(f'Fail to read configuration file: {error}')
+        logger.error('Fail to read configuration file: %s' % error)
