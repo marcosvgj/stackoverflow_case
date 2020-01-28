@@ -7,6 +7,7 @@ services:
     ports:
       - "5432:5432"
     environment:
+      - INJECTED_METADATA=${INJECTED_METADATA}
       - SUPERSET_USERNAME=${SUPERSET_USERNAME}
       - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
       - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
@@ -22,7 +23,7 @@ services:
       - SLEEP_TIME=${SLEEP_TIME}
     volumes:
       - ./postgres/ddl:/docker-entrypoint-initdb.d/
-      - ./postgres/data:/var/lib/postgresql/data/pgdata
+      - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
       - general
   
@@ -39,6 +40,7 @@ services:
     links: 
       - postgres
     environment:
+      - INJECTED_METADATA=${INJECTED_METADATA}
       - SUPERSET_USERNAME=${SUPERSET_USERNAME}
       - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
       - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
@@ -68,6 +70,7 @@ services:
       --email ${SUPERSET_EMAIL} \
       --password ${SUPERSET_PASSWORD}
     environment:
+      - INJECTED_METADATA=${INJECTED_METADATA}
       - SUPERSET_USERNAME=${SUPERSET_USERNAME}
       - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
       - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
@@ -95,8 +98,9 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - ./postgres/dml/init_superset.sql:/postgres/init_superset.sql
-      - ./postgres/tmp/waiting_database.sh:/postgres/waiting_database.sh
+      - ./postgres/ddl/load_superset_metadata.sh:/postgres/load_superset_metadata.sh
     environment:
+      - INJECTED_METADATA=${INJECTED_METADATA}
       - SUPERSET_USERNAME=${SUPERSET_USERNAME}
       - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
       - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
@@ -126,8 +130,9 @@ services:
       - postgres
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - ./postgres/ddl/waiting_database.sh:/docker-entrypoint-initdb.d/waiting_database.sh
+      - ./postgres/ddl/load_superset_metadata.sh:/docker-entrypoint-initdb.d/load_superset_metadata.sh
     environment:
+      - INJECTED_METADATA=${INJECTED_METADATA}
       - SUPERSET_USERNAME=${SUPERSET_USERNAME}
       - SUPERSET_FIRSTNAME=${SUPERSET_FIRSTNAME}
       - SUPERSET_LASTNAME=${SUPERSET_LASTNAME}
@@ -141,7 +146,7 @@ services:
       - SUPERSET_DB=${SUPERSET_DB}
       - POSTGRES_DB=${POSTGRES_DB}
       - SLEEP_TIME=${SLEEP_TIME}
-    command: docker exec -u ${POSTGRES_USER} ${POSTGRES_DOCKER_IMAGE_NAME} sh /docker-entrypoint-initdb.d/waiting_database.sh
+    command: docker exec -u ${POSTGRES_USER} ${POSTGRES_DOCKER_IMAGE_NAME} sh /docker-entrypoint-initdb.d/load_superset_metadata.sh
     depends_on:
       - postgres_metadata_load
 networks:

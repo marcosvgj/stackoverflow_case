@@ -6,27 +6,29 @@ from werkzeug.contrib.cache import FileSystemCache
 
 logger = logging.getLogger()
 
+def start_superset_config():
+    return """
 
-"""
+    Starting of customized superset_config.py:
 
-Variables:
-    DATABASE_DIALECT
-    POSTGRES_USER
-    POSTGRES_PASSWORD
-    POSTGRES_HOST
-    POSTGRES_PORT
-    POSTGRES_DB
-    SUPERSET_DB
-    SLEEP_TIME
+    Environment Variables:
+        DATABASE_DIALECT
+        POSTGRES_USER
+        POSTGRES_PASSWORD
+        POSTGRES_HOST
+        POSTGRES_PORT
+        POSTGRES_DB
+        SUPERSET_DB
+        SLEEP_TIME
+        
+    Functions:
+        get_sqlalchemy_database_uri: sqlalchemy_database_uri string constructor
+        get_env_variable: get an environment variable given name
+        wait_connection: wrap function to connection test
+        verify_connection: returns True if the connection are stable. Otherwise False
+        verify_metadata_availability: returns True if the connection are stable with a specific table. Otherwise False
     
-Functions:
-    get_sqlalchemy_database_uri: sqlalchemy_database_uri string constructor
-    get_env_variable: get an environment variable given name
-    wait_connection: wrap function to connection test
-    verify_connection: returns True if the connection are stable. Otherwise False
-    verify_metadata_availability: returns True if the connection are stable with a specific table. Otherwise False
- 
-"""
+    """
 def show_parameters():
     global DATABASE_DIALECT
     global POSTGRES_USER
@@ -35,8 +37,16 @@ def show_parameters():
     global POSTGRES_PORT
     global POSTGRES_DB
 
-    print(f' USER: {POSTGRES_USER}, PASSWORD: {POSTGRES_PASSWORD}, HOST: {POSTGRES_HOST}, PORT: {POSTGRES_PORT}' + 
-        f',POSTGRES_DB: {POSTGRES_DB}')
+    return """
+        PARAMETERS VALUES:
+        
+        -- USER: %s
+        -- PASSWORD: %s
+        -- HOST: %s
+        -- PORT: %s 
+        -- POSTGRES_DB: %s
+
+        """ % (POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DB)
 
 def get_sqlalchemy_database_uri():
     global DATABASE_DIALECT
@@ -96,8 +106,8 @@ POSTGRES_DB = get_env_variable("POSTGRES_DB")
 SLEEP_TIME = get_env_variable("SLEEP_TIME")
 
 SQLALCHEMY_DATABASE_URI = get_sqlalchemy_database_uri()
+start_superset_config()
 show_parameters()
 
-# [TODO] Review is needed 
-CONNECTION = psycopg2.connect(host="postgres", database="postgres", user="postgres",  password="postgres")
+CONNECTION = psycopg2.connect(host=POSTGRES_HOST, database=POSTGRES_DB, user=POSTGRES_USER, password=POSTGRES_PASSWORD)
 wait_connection(verify_connection)
