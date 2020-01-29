@@ -107,6 +107,8 @@ Para realizar a execução siga os passos a seguir:
 5. Aguarde em torno a execução completa do <b>docker-compose</b>
 6. Após a execução de todos os serviços do docker-compose estiver com o status <b>done</b> passe para o próximo passo
 7. Abra o Apache Superset em seu navegador de preferência utilizando a URL: <b>http://127.0.0.1:8088/</b>
+7. Caso o sistema operacional seja Windows verifique o ip da docker-machine antes, assim a nova URL será <b>$(docker-machine ip):8088</b>
+8. Usuário e senha padrão são admin:admin
 8. Vá na Aba **SQL Lab** >> **Saved Queries**
 9. Para cada query abra o link disponvel na coluna <b> Pop Tab Link </b> e selecione o botão <b> Run Query </b>
 10. Repita a etapa 9 para cada query disponibilizada.
