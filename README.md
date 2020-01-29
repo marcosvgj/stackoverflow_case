@@ -89,7 +89,7 @@ Nesta estruturação foram utilizadas as seguintes tecnologias:
 
 1. Postgres 9.6 [Dockerizado]
 2. Apache Superset [Dockerizado]
-3. Apache PySpark [Dockerização em andamento]
+3. Apache PySpark [Dockerizado]
 
 <i>obs.: A sincronização destes componentes é de responsabilidade do Docker Compose. </i>
 
@@ -111,7 +111,7 @@ Para realizar a execução siga os passos a seguir:
 9. Para cada query abra o link disponvel na coluna <b> Pop Tab Link </b> e selecione o botão <b> Run Query </b>
 10. Repita a etapa 9 para cada query disponibilizada.
 
-Para realizar o ***bypass*** no procedimento acima, os conteúdos foram disponibilizados no próprio repositório vide os link's abaixo:
+Para realizar o ***bypass*** no procedimento acima, os conteúdos foram disponibilizados no próprio repositório vide link's abaixo:
 
 A seguir segue o link de cada query realizada para responder as perguntas do teste: 
 
