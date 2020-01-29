@@ -97,7 +97,10 @@ A proposta inicial era provisionar por meio do Docker compose um ambiente contro
 
 ![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/visao_dockercompose.svg)
 
-Para realizar a execução siga os passos a seguir: 
+Para realizar a execução siga os passos a seguir:
+
+***Caso o sistema operacional utilizado seja Windows antes de realizar os procedimentos a seguir execute o seguinte comando:*** ```git config --global core.autocrlf input```
+
 1. Verifique se você possui os pré-requisitos na sua máquina: 
     - Docker [<a href="https://docs.docker.com/"> Link! </a>]
     - Docker Compose [<a href="https://docs.docker.com/compose/"> Link! </a>]
