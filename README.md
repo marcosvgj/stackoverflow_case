@@ -137,7 +137,7 @@ A seguir segue o link de cada query realizada para responder as perguntas do tes
 
 ### Questão Extra - Esboço <a name="t5"></a>
 
-[Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/teste_ame_questao_extra.png)
+![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/teste_ame_questao_extra.png)
 
 ### Vantagens da arquitetura proposta
 
