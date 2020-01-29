@@ -95,6 +95,8 @@ Nesta estruturação foram utilizadas as seguintes tecnologias:
 
 A proposta inicial era provisionar por meio do Docker compose um ambiente controlado para realizar o processo de ETL e a consulta de dados. As queries e os resultados podem ser obtidos através da execução do <b> docker-compose.yml </b> criado.
 
+![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/visao_dockercompose.svg)
+
 Para realizar a execução siga os passos a seguir: 
 1. Verifique se você possui os pré-requisitos na sua máquina: 
     - Docker [<a href="https://docs.docker.com/"> Link! </a>]
