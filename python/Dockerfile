@@ -1,27 +1,26 @@
-FROM openjdk:8-alpine
+FROM bde2020/spark-base:2.4.4-hadoop2.7
 
 ARG MODEL_PATH
 ARG USED_JAR_PATH
+ARG SPARK_MASTER_NAME
+ARG SPARK_MASTER_PORT
+ARG SPARK_APPLICATION_PYTHON_LOCATION
+ARG SPARK_APPLICATION_ARGS
 
 ENV MODEL_PATH=${MODEL_PATH}
 ENV USED_JAR_PATH=${USED_JAR_PATH}
-ENV MODEL_PATH='model.models'
-ENV USED_JAR_PATH='/jars/postgresql-9.4.1207.jre6.jar'
+ENV SPARK_MASTER_NAME=${SPARK_MASTER_NAME}
+ENV SPARK_MASTER_PORT=${SPARK_MASTER_PORT}
+ENV SPARK_APPLICATION_PYTHON_LOCATION=${SPARK_APPLICATION_PYTHON_LOCATION}
+ENV SPARK_APPLICATION_ARGS=${SPARK_APPLICATION_ARGS}
 
-RUN apk add --update \
-    python \
-    python-dev \
-    py-pip \
-    build-base \
-  && pip install virtualenv \
-  && rm -rf /var/cache/apk/*
-
-COPY /jars /jars
 COPY /src /src
+COPY /jars /src/jars
 COPY /requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
-COPY /jars /jars
 
-WORKDIR /src
+COPY run.sh /
+
+CMD ["/bin/bash", "/run.sh"]
 
 

@@ -149,6 +149,27 @@ services:
     command: docker exec -u ${POSTGRES_USER} ${POSTGRES_DOCKER_IMAGE_NAME} sh /docker-entrypoint-initdb.d/load_superset_metadata.sh
     depends_on:
       - postgres_metadata_load
+  spark:
+      build: python/
+      restart: on-failure
+      ports:
+        - "80:80"
+        - "4040:4040"
+      networks:
+        - general
+      links:
+        - postgres
+      volumes:
+        - "/var/run/docker.sock:/var/run/docker.sock"
+      environment:
+        - MODEL_PATH=${MODEL_PATH}
+        - USED_JAR_PATH=${USED_JAR_PATH}
+        - SPARK_MASTER_NAME=${SPARK_MASTER_NAME}
+        - SPARK_MASTER_PORT=${SPARK_MASTER_PORT}
+        - SPARK_APPLICATION_PYTHON_LOCATION=${SPARK_APPLICATION_PYTHON_LOCATION}
+        - SPARK_APPLICATION_ARGS=${SPARK_APPLICATION_ARGS}
+      depends_on:
+        - postgres_metadata_insertion
 networks:
     general:
         driver: bridge

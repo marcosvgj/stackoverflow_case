@@ -1,5 +1,5 @@
 pipeline: 
-  datasource: /home/marcos/dataengineeringatame/python/src/resources/base_de_respostas_10k_amostra.csv
+  datasource: /src/resources/base_de_respostas_10k_amostra.csv
   fact_table: respondente
   dimension_tables:
     - ferramenta_comunic
@@ -104,7 +104,7 @@ pipeline:
       
 postgres:
   port: 5432
-  host: localhost
+  host: postgres
   database: postgres
   user: postgres
   password: postgres

@@ -2,7 +2,7 @@ import os
 import yaml
 from common.utils.logger import logger
 
-DEFAULT_CONFIGURATION_FILE='resources/configuration.yml'
+DEFAULT_CONFIGURATION_FILE='src/resources/configuration.yml'
 
 def configuration(abs_path=None):
     root = os.path.dirname(os.path.abspath("__main__"))
