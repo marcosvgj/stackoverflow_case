@@ -137,7 +137,7 @@ A seguir segue o link de cada query realizada para responder as perguntas do tes
 
 ### Questão Extra - Esboço <a name="t5"></a>
 
-![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/teste_ame_questao_extra.png)
+![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/master/docs/teste_ame_questao_extra.png)
 
 ### Vantagens da arquitetura proposta
 
@@ -145,5 +145,3 @@ Custo reduzido em comparação a implementação manual via EC2 ou EKS.
 Serviço transfere responsabilidade para o provider sobre a configuração interna do cluster HDFS
 
 Além disso, as ferramentas Apache Superset e Apache Druid viabilizam o consumo de dados em <i>real-time</i> utilizando peça de mensageria o Apache Kafka.
-
-
