@@ -10,7 +10,6 @@ Uma análise sobre dados do Stack Overflow
 3. [Queries executadas](#t3)
 4. [Resultados](#t4)
 5. [Questão Extra](#t5)
-6. [Adendos](#t6)
 
 ## Resumo <a name="summary"></a>
 <p align="justify">O counteúdo deste repositório tem como objetivo demonstrar um fluxo de dados para realizar a normalização de um banco de dados utilizando como base <b>PySpark</b>. Além disso, será demonstrada a utilização da ferramenta <b>Apache Superset</b> para workloads de <i>Self-Service BI.</i></p>
@@ -82,6 +81,38 @@ Este componente tem como principal responsabilidade realizar a junção das regr
 Este componente tem como principal responsabilidade ser uma interface do componente **Service** (ex.: Interface pode ser utilizada na criação de Operadores customizados para o Apache Airflow - Orquestrador).
 
 ### Queries executadas <a name="t3"></a>
+
+
+A estruturação de códigos utilizada nesta aplicação tem como o objetivo demonstrar (por meio do hands-on) a implementação da arquitetura proposta.
+
+Nesta estruturação foram utilizadas as seguintes tecnologias: 
+
+1. Postgres 9.6 [Dockerizado]
+2. Apache Superset [Dockerizado]
+3. Apache PySpark [Dockerização em andamento]
+
+<i>obs.: A sincronização destes componentes é de responsabilidade do Docker Compose. </i>
+
+A proposta inicial era provisionar por meio do Docker compose um ambiente controlado para realizar o processo de ETL e a consulta de dados. As queries e os resultados podem ser obtidos através da execução do <b> docker-compose.yml </b> criado.
+
+![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/develop/docs/visao_dockercompose.svg)
+
+Para realizar a execução siga os passos a seguir: 
+1. Verifique se você possui os pré-requisitos na sua máquina: 
+    - Docker [<a href="https://docs.docker.com/"> Link! </a>]
+    - Docker Compose [<a href="https://docs.docker.com/compose/"> Link! </a>]
+2. <b>clone o repositório:</b> ```https://github.com/marcosvgj/dataengineeringatame.git```
+3. <b>execute o comando:</b> cd ```dataengineeringatame/```
+4. <b>execute o comando:</b> ```docker-compose up --build -d ```
+5. Aguarde em torno a execução completa do <b>docker-compose</b>
+6. Após a execução de todos os serviços do docker-compose estiver com o status <b>done</b> passe para o próximo passo
+7. Abra o Apache Superset em seu navegador de preferência utilizando a URL: <b>http://127.0.0.1:8088/</b>
+8. Vá na Aba **SQL Lab** >> **Saved Queries**
+9. Para cada query abra o link disponvel na coluna <b> Pop Tab Link </b> e selecione o botão <b> Run Query </b>
+10. Repita a etapa 9 para cada query disponibilizada.
+
+Para realizar o ***bypass*** no procedimento acima, os conteúdos foram disponibilizados no próprio repositório vide os link's abaixo:
+
 A seguir segue o link de cada query realizada para responder as perguntas do teste: 
 
 1. Questão 1 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_01.sql"> Link! </a>]
@@ -94,7 +125,6 @@ A seguir segue o link de cada query realizada para responder as perguntas do tes
 8. Questão 8 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_08.sql"> Link! </a>]
 
 ### Resultados <a name="t4"></a>
-Para cada query realizada segue um resultado que responde as perguntas do teste: 
 
 1. Resultado - Questão 1 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_1_20200128T205232.csv"> Link! </a>]
 2. Resultado - Questão 2 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_2_20200128T205407.csv"> Link! </a>]
@@ -115,19 +145,3 @@ Custo reduzido em comparação a implementação manual via EC2 ou EKS.
 Serviço transfere responsabilidade para o provider sobre a configuração interna do cluster HDFS
 
 Além disso, as ferramentas Apache Superset e Apache Druid viabilizam o consumo de dados em <i>real-time</i> utilizando peça de mensageria o Apache Kafka.
-
-### Adendos <a name="t6"></a>
-
-A estruturação de códigos utilizada nesta aplicação tem como o objetivo demonstrar (por meio do hands-on) a implementação da arquitetura proposta.
-
-Nesta estruturação foram utilizadas as seguintes tecnologias: 
-
-1. Postgres 9.6 [Dockerizado]
-2. Apache Superset [Dockerizado]
-3. Apache PySpark [Dockerização em andamento]
-
-<i>obs.: A sincronização destes componentes é de responsabilidade do Docker Compose. </i>
-
-A proposta inicial era provisionar por meio do Docker compose um ambiente controlado para realizar o processo de ETL e a consulta de dados.
-
-Status: Não conclusão devido o esgotamento de tempo.

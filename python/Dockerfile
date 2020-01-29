@@ -1,16 +1,26 @@
-FROM alpine:3.9.4
+FROM bde2020/spark-base:2.4.4-hadoop2.7
 
-# TODO 
-#
-# INSTALAR SPARK: https://www.apache.org/dyn/closer.lua/spark/spark-2.4.4/spark-2.4.4-bin-hadoop2.7.tgz
-# INSTALAR PYTHON
-# INSTALAR JAVA 8
-# INSTALAR REQUIREMENTS.TXT
-# ONBUILD RUN virtualenv /env && /env/bin/pip install -r /requirements.txt
-#
-#
-# RUN add-apt-repository ppa:openjdk-r/ppa
-# RUN sudo apt-get update
-# RUN apt-get install openjdk-8-jdk
-# RUN sudo update-alternatives --config java
-#
+ARG MODEL_PATH
+ARG USED_JAR_PATH
+ARG SPARK_MASTER_NAME
+ARG SPARK_MASTER_PORT
+ARG SPARK_APPLICATION_PYTHON_LOCATION
+ARG SPARK_APPLICATION_ARGS
+
+ENV MODEL_PATH=${MODEL_PATH}
+ENV USED_JAR_PATH=${USED_JAR_PATH}
+ENV SPARK_MASTER_NAME=${SPARK_MASTER_NAME}
+ENV SPARK_MASTER_PORT=${SPARK_MASTER_PORT}
+ENV SPARK_APPLICATION_PYTHON_LOCATION=${SPARK_APPLICATION_PYTHON_LOCATION}
+ENV SPARK_APPLICATION_ARGS=${SPARK_APPLICATION_ARGS}
+
+COPY /src /src
+COPY /jars /src/jars
+COPY /requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt
+
+COPY run.sh /
+
+CMD ["/bin/bash", "/run.sh"]
+
+

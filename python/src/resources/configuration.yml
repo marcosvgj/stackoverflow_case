@@ -1,12 +1,16 @@
 pipeline: 
-  datasource: /home/marcos/dataengineeringatame/python/src/resources/base_de_respostas_10k_amostra.csv
-  fact: respondente
+  datasource: /src/resources/base_de_respostas_10k_amostra.csv
+  fact_table: respondente
   dimension_tables:
     - ferramenta_comunic
     - sistema_operacional
     - linguagem_programacao
     - empresa
     - pais
+  
+  middle_entity_tables:
+    - resp_usa_linguagem
+    - resp_usa_ferramenta
 
   ferramenta_comunic:
     model: CommunicationToolModel
@@ -47,10 +51,60 @@ pipeline:
     model: RespondentModel
     database: stackoverflow
     table: respondente
-  
+
+  resp_usa_linguagem:
+    model: RespLanguageModel
+    field: LanguageWorkedWith
+    database: stackoverflow
+    table: resp_usa_linguagem
+    embbebedList: True
+    options:
+      left_original_column_id: Respondent
+      left_column_id: respondente_id
+      left_columns_selected:
+        - Respondent
+        - LanguageWorkedWith
+        - Hobby
+      has_adicional_columns: True
+      adicional_columns:
+        - Hobby
+      adicional_columns_definition:
+        Hobby:
+          name: momento
+          has_conversion_values: True
+          conversion_values:
+            'No': 0
+            'Yes': 1
+            others: 0
+          column_type: IntegerType
+      right_original_column_target: LanguageWorkedWith
+      right_column_target: nome
+      right_column_id: resp_usa_linguagem_id
+      right_table: linguagem_programacao
+      right_database: stackoverflow
+
+  resp_usa_ferramenta:
+    model: RespToolsModel
+    field: CommunicationTools
+    database: stackoverflow
+    table: resp_usa_ferramenta
+    embbebedList: True
+    options:
+      left_original_column_id: Respondent
+      left_column_id: respondente_id
+      left_columns_selected:
+        - Respondent
+        - CommunicationTools
+      has_adicional_columns: False
+      right_original_column_target: CommunicationTools
+      right_column_target: nome
+      right_column_id: resp_usa_ferramenta_id
+      right_table: ferramenta_comunic
+      right_database: stackoverflow
+      
 postgres:
   port: 5432
-  host: localhost
+  host: postgres
   database: postgres
   user: postgres
   password: postgres
