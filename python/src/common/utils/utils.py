@@ -1,5 +1,6 @@
 import os
 import sys
+from pyspark.sql import types
 
 def get_model_class(name):
     """ Get class of Model given name """
@@ -17,9 +18,10 @@ def get_env_variable(var, default=None):
         else:
             raise EnvironmentError(ERROR_MSG)
 
-def instanceOf(C, subclass):
-    try:
-        print(list(filter(lambda x: x.__name__ == subclass, C.__subclasses__())))
-        return next(filter(lambda x: x.__name__ == subclass, C.__subclasses__()).__iter__())
-    except StopIteration as error:
-        raise Exception('Please verify if this feature was implemented: %s' % error)
+def get_type(name):
+    return getattr(types, name)()
+
+def get_spark_jar():
+    """ Get class of Model given name """
+    return get_env_variable('USED_JAR_PATH')
+    

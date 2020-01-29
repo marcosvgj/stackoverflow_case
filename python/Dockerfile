@@ -1,16 +1,27 @@
-FROM alpine:3.9.4
+FROM openjdk:8-alpine
 
-# TODO 
-#
-# INSTALAR SPARK: https://www.apache.org/dyn/closer.lua/spark/spark-2.4.4/spark-2.4.4-bin-hadoop2.7.tgz
-# INSTALAR PYTHON
-# INSTALAR JAVA 8
-# INSTALAR REQUIREMENTS.TXT
-# ONBUILD RUN virtualenv /env && /env/bin/pip install -r /requirements.txt
-#
-#
-# RUN add-apt-repository ppa:openjdk-r/ppa
-# RUN sudo apt-get update
-# RUN apt-get install openjdk-8-jdk
-# RUN sudo update-alternatives --config java
-#
+ARG MODEL_PATH
+ARG USED_JAR_PATH
+
+ENV MODEL_PATH=${MODEL_PATH}
+ENV USED_JAR_PATH=${USED_JAR_PATH}
+ENV MODEL_PATH='model.models'
+ENV USED_JAR_PATH='/jars/postgresql-9.4.1207.jre6.jar'
+
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip \
+    build-base \
+  && pip install virtualenv \
+  && rm -rf /var/cache/apk/*
+
+COPY /jars /jars
+COPY /src /src
+COPY /requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt
+COPY /jars /jars
+
+WORKDIR /src
+
+

@@ -57,6 +57,7 @@ class RespondentModel(StructType):
     def schema(self):    
         return StructType([
             StructField("respondente_id", IntegerType(), False),
+            StructField("nome", StringType(), False),
             StructField("contrib_open_source", IntegerType(), False),
             StructField("programa_hobby", IntegerType(), False),
             StructField("salario", DoubleType(), False),

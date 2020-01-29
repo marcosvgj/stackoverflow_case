@@ -4,7 +4,7 @@ from dao.postgres import PostgresDAO
 from common.utils.logger import logger
 from common.ingestor.base import Ingestor
 from common.utils.utils import get_model_class
-from business.rules import FactRules
+from business.rules import FactRules, check_nullity
 
 class Fact(Ingestor):
     def __init__(self, source, model, database='default', table='table', sink=PostgresDAO):
@@ -19,9 +19,17 @@ class Fact(Ingestor):
         self.update_source(Ingestor.apply(FactRules.salary_standardization, self.metadata))
         self.update_source(Ingestor.apply(FactRules.respondent_name_creation, self.metadata))
         self.update_source(Ingestor.apply(FactRules.columns_renames, self.metadata))
+        
+        self.update_source(check_nullity(self.metadata, 'CommunicationTools'))
+        self.update_source(check_nullity(self.metadata, 'OperatingSystem'))
+        self.update_source(check_nullity(self.metadata, 'LanguageWorkedWith'))
+        self.update_source(check_nullity(self.metadata, 'CompanySize'))
+        self.update_source(check_nullity(self.metadata, 'Country'))
+
         self.update_source(Ingestor.apply(FactRules.treat_embbebed_list, self.metadata))
         self.update_source(Ingestor.apply(FactRules.fact_enrichment, self.metadata))
         self.update_source(Ingestor.apply(FactRules.field_to_boolean, self.metadata))
+        self.update_source(Ingestor.apply(FactRules.types_converter, self.metadata))
         return self.filter_schema()
     
     def save(self):
