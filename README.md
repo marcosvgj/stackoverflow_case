@@ -1,5 +1,5 @@
-# Data Engineering - AME Digital
-Uma análise sobre dados do Stack Overflow
+# Uma análise sobre dados do Stack Overflow
+
 
 ### Table of Contents
 
