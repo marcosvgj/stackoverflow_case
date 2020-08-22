@@ -118,35 +118,13 @@ Para realizar a execução siga os passos a seguir:
 
 Para realizar o ***bypass*** no procedimento acima, os conteúdos foram disponibilizados no próprio repositório vide link's abaixo:
 
-A seguir segue o link de cada query realizada para responder as perguntas do teste: 
+Insights sobre os dados normalizados: 
 
-1. Questão 1 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_01.sql"> Link! </a>]
-2. Questão 2 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_02.sql"> Link! </a>]
-3. Questão 3 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_03.sql"> Link! </a>]
-4. Questão 4 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_04.sql"> Link! </a>]
-5. Questão 5 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_05.sql"> Link! </a>]
-6. Questão 6 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_06.sql"> Link! </a>]
-7. Questão 7 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_07.sql"> Link! </a>]
-8. Questão 8 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_08.sql"> Link! </a>]
-
-### Resultados <a name="t4"></a>
-
-1. Resultado - Questão 1 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_1_20200128T205232.csv"> Link! </a>]
-2. Resultado - Questão 2 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_2_20200128T205407.csv"> Link! </a>]
-3. Resultado - Questão 3 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_3_20200128T214344.csv"> Link! </a>]
-4. Resultado - Questão 4 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_4_20200128T214424.csv"> Link! </a>]
-5. Resultado - Questão 5 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_5_20200128T214447.csv"> Link! </a>]
-6. Resultado - Questão 6 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_6_20200128T214522.csv"> Link! </a>]
-7. Resultado - Questão 7 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_7_20200128T214545.csv"> Link! </a>]
-8. Resultado - Questão 8 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/answers/sqllab_question_8_20200128T214617.csv"> Link! </a>]
-
-### Questão Extra - Esboço <a name="t5"></a>
-
-![Alt text](https://github.com/marcosvgj/dataengineeringatame/blob/master/docs/teste_ame_questao_extra.png)
-
-### Vantagens da arquitetura proposta
-
-Custo reduzido em comparação a implementação manual via EC2 ou EKS.
-Serviço transfere responsabilidade para o provider sobre a configuração interna do cluster HDFS
-
-Além disso, as ferramentas Apache Superset e Apache Druid viabilizam o consumo de dados em <i>real-time</i> utilizando peça de mensageria o Apache Kafka.
+1. Insight 1 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_01.sql"> Link! </a>]
+2. Insight 2 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_02.sql"> Link! </a>]
+3. Insight 3 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_03.sql"> Link! </a>]
+4. Insight 4 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_04.sql"> Link! </a>]
+5. Insight 5 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_05.sql"> Link! </a>]
+6. Insight 6 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_06.sql"> Link! </a>]
+7. Insight 7 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_07.sql"> Link! </a>]
+8. Insight 8 [<a href="https://github.com/marcosvgj/dataengineeringatame/blob/develop/superset/queries/query_08.sql"> Link! </a>]
